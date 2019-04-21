@@ -1,3 +1,6 @@
+<a href="<?= base_url('berita_acara/tambah'); ?>" class="btn btn-primary mb-3">Tambah</a>
+<?= $this->session->flashdata('message'); ?>
+
 <div class="card mb-3">
     <div class="card-header">
         Berita acara</div>
@@ -11,19 +14,29 @@
                         <th>Arsip</th>
                         <th>Tanggal acara/kegiatan</th>
                         <th>Keterangan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>27</td>
-                        <td>2011/01/25</td>
-                    </tr>
+                    <?php
+                    $i = 1;
+                    foreach ($berita_acara as $ba) :
+                        ?>
+                        <tr>
+                            <td><?= $i++; ?></td>
+                            <td><?= $ba['nama_acara']; ?></td>
+                            <td><?= $ba['arsip']; ?></td>
+                            <td><?= $ba['tanggal_acara']; ?></td>
+                            <td><?= $ba['keterangan'] ?></td>
+                            <td>
+                                <a href="<?= base_url('berita_acara/ubah/' . $ba['id']); ?>"><i class="fas fa-fw fa-edit"></i></a>
+                                <a href="<?= base_url('berita_acara/hapus/' . $ba['id']); ?>" onclick="return confirm('Hapus ?');"><i class="fas fa-fw fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="card-footer small text-muted">Updated <?= time('D'); ?></div>
+    <div class="card-footer small text-muted">Updated <?= date('Y - m - d'); ?></div>
 </div>
